@@ -1,3 +1,5 @@
+import { buscarProdutos, inserirProduto, excluirProduto, updateProduto } from "../repositories/postRepository";
+
 let produtos = [
     {id: 1, nome: 'Palha Italiana', descricao: 'Palha Italiana'},
     {id: 2, nome: 'Brownie', descricao: 'Brownie'}
@@ -5,7 +7,10 @@ let produtos = [
 
 let nextId = Math.max(0, ...produtos.map(p => p.id)) + 1;
 
-export const getProdutos = () => produtos
+export const getProdutos = async () => {
+    const posts = await buscarProdutos()
+    return posts
+}
 
 export const criarProduto = ({nome, descricao}) => {
     const novoProduto = {id: nextId++, nome, descricao};

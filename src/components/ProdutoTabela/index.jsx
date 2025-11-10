@@ -9,18 +9,20 @@ const ProdutoTabela = ({ itens = [], onEdit, onDelete }) => {
       <table className={styles.table}>
         <thead>
           <tr className={styles.title}>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descrição</th>
+            <th>Id</th>
+            <th>Body</th>
+            <th>Title</th>
+            <th>User Id</th>
             <th style={{ width: 180 }}>Ações</th>
           </tr>
         </thead>
         <tbody>
-          {itens.map(({ id, nome, descricao }) => (
+          {itens.map(({ id, body, title, userId }) => (
             <tr className={styles.body} key={id}>
               <td>{id}</td>
-              <td>{nome}</td>
-              <td>{descricao}</td>
+              <td>{body}</td>
+              <td>{title}</td>
+              <td>{userId}</td>
               <td>
                 <div className={styles.row}>
                   <button className={styles.button} onClick={() => onEdit(id)}>Editar</button>

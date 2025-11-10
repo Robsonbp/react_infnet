@@ -31,10 +31,9 @@
   color:#000000;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
+.flex{
+  display:inline;
+  padding: 1rem;
 }
 
 @media (max-width:860px){

@@ -11,7 +11,9 @@ const ProdutoPage = () => {
   const [editandoId, setEditandoId] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, id: null, msg: '' })
 
-  useEffect(() => setItens(getProdutos()), [])
+  useEffect(() => {
+    getProdutos().then((dados) => setItens(dados))
+  }, [])
 
   const selecionado = useMemo(
     () => itens.find(i => i.id === editandoId) || null,
@@ -21,19 +23,19 @@ const ProdutoPage = () => {
   const filtrados = useMemo(() => {
     const q = filtro.trim().toLowerCase()
     if (!q) return itens
-    return itens.filter(({ nome, descricao }) =>
-      [nome, descricao].some(v => String(v).toLowerCase().includes(q))
+    return itens.filter(({ userId, id, title, body }) =>
+      [userId, id, title, body].some(v => String(v).toLowerCase().includes(q))
     )
   }, [itens, filtro])
 
-  const handleCreate = ({ nome, descricao }) => {
-    const novo = criarProduto({ nome, descricao }) // arrow + destructuring
+  const handleCreate = ({ userId, id, title, body }) => {
+    const novo = criarProduto({ userId, id, title, body })
     setItens(getProdutos())
   }
 
-  const handleUpdate = ({ nome, descricao }) => {
+  const handleUpdate = ({ userId, id, title, body }) => {
     if (!selecionado) return
-    const atualizado = atualizarProduto({ id: selecionado.id, nome, descricao })
+    const atualizado = atualizarProduto({ id: selecionado.id, userId, id, title, body })
     if (atualizado) {
       setItens(getProdutos())
       setEditandoId(null)
@@ -60,23 +62,26 @@ const ProdutoPage = () => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <div className={styles.title}>Produtos</div>
+        <div className={styles.title}>Posts</div>
         <input
           className={styles.input}
-          placeholder="Buscar por nome ou descrição…"
+          placeholder="Buscar..."
           value={filtro}
           onChange={e => setFiltro(e.target.value)}
           style={{ maxWidth: 360 }}
         />
       </header>
 
-      <div className={styles.grid}>
+      <div className={styles.flex}>
         <Formulario
           key={selecionado?.id || 'novo'}
           conteudoInicial={selecionado || undefined}
           onSubmit={selecionado ? handleUpdate : handleCreate}
           onCancel={selecionado ? () => setEditandoId(null) : undefined}
         />
+      </div>
+
+      <div className={styles.flex}>
         <Tabela
           itens={filtrados}
           onEdit={id => setEditandoId(id)}
