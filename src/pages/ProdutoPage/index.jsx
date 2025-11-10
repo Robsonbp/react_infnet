@@ -29,7 +29,6 @@ const ProdutoPage = () => {
   const handleCreate = ({ nome, descricao }) => {
     const novo = criarProduto({ nome, descricao }) // arrow + destructuring
     setItens(getProdutos())
-    setEditandoId(novo.id)
   }
 
   const handleUpdate = ({ nome, descricao }) => {
@@ -74,7 +73,7 @@ const ProdutoPage = () => {
       <div className={styles.grid}>
         <Formulario
           key={selecionado?.id || 'novo'}
-          initialData={selecionado || undefined}
+          conteudoInicial={selecionado || undefined}
           onSubmit={selecionado ? handleUpdate : handleCreate}
           onCancel={selecionado ? () => setEditandoId(null) : undefined}
         />

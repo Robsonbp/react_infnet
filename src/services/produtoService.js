@@ -30,7 +30,7 @@ export const deletarProduto = (id) => {
         return false
     }
 
-    const mensagemConfirmacao = `Tem certeza que deseja excluir o item '${itemToDelete.nome}' (ID: ${id})?`;
+    const mensagemConfirmacao = `Tem certeza que deseja excluir o item '${produtoParaDeletar.nome}' (ID: ${id})?`;
     if (window.confirm(mensagemConfirmacao)) {
         produtos = produtos.filter(produto => produto.id !== id);
         return true

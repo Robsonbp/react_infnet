@@ -3,10 +3,10 @@ import styles from './style.module.css'
 
 const vazio = { nome: '', descricao: '' }
 
-const ProdutoForm = ({ dataInicial = vazio, onSubmit, onCancel }) => {
-  const [form, setForm] = useState(dataInicial)
+const ProdutoForm = ({ conteudoInicial = vazio, onSubmit, onCancel }) => {
+  const [form, setForm] = useState(conteudoInicial)
 
-  useEffect(() => setForm(dataInicial), [dataInicial])
+  useEffect(() => setForm(conteudoInicial), [conteudoInicial])
 
   const handleChange = ({ target: { name, value } }) =>
     setForm(prev => ({ ...prev, [name]: value }))
@@ -19,8 +19,8 @@ const ProdutoForm = ({ dataInicial = vazio, onSubmit, onCancel }) => {
   }
 
   return (
-    <form className={styles.card} onSubmit={handleSubmit}>
-      <h2 className={styles.title}>{dataInicial?.id ? 'Editar produto' : 'Novo produto'}</h2>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h2 className={styles.title}>{conteudoInicial?.id ? 'Editar produto' : 'Novo produto'}</h2>
       <div className={styles.stack}>
         <input
           className={styles.input}

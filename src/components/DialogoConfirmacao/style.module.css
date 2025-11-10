@@ -20,11 +20,12 @@
 .title{
     margin:0 0 8px;
     font-size:18px;
-    font-weight:700
+    font-weight:700;
+    color: #ffffff;
 }
 
 .muted{
-    color:var(--muted)
+    color:#ffffff
 }
 
 .actions{
@@ -44,11 +45,13 @@
   font-weight:600;
 }
 
-.secondary{
-    background:#1f2937;
-    color:#ffffff
+.cancelar{
+    background:#ffffff;
+    color:#000000
 }
 
-.danger{
-    color:#0b1020
+.confirmar{
+    background: #ff6e6e;
+    color:#000000;
+    margin-left: 1rem;
 }
