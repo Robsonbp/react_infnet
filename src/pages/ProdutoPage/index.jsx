@@ -29,16 +29,16 @@ const ProdutoPage = () => {
   }, [itens, filtro])
 
   const handleCreate = async ({ userId, id, title, body }) => {
-    const novo = criarProduto({ userId, id, title, body })
-    posts = await getProdutos()
+    const novo = await criarProduto({ userId, id, title, body })
+    const posts = await getProdutos()
     setItens(posts)
   }
 
   const handleUpdate = async ({ userId, id, title, body }) => {
     if (!selecionado) return
-    const atualizado = atualizarProduto({ id: selecionado.id, userId, id, title, body })
+    const atualizado = await atualizarProduto({ id: selecionado.id, title, body, userId })
     if (atualizado) {
-      posts = await getProdutos()
+      const posts = await getProdutos()
       setItens(posts)
       setEditandoId(null)
     }

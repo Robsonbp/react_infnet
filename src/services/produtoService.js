@@ -12,19 +12,14 @@ export const getProdutos = async () => {
     return posts
 }
 
-export const criarProduto = ({nome, descricao}) => {
-    const novoProduto = {id: nextId++, nome, descricao};
-    produtos = [...produtos, novoProduto];
-    return novoProduto;
+export const criarProduto = async ({title, body, userId}) => {
+    const response = await inserirProduto({title, body, userId})
+    return response;
 }
 
-export const atualizarProduto = ({id, nome, descricao}) => {
-    const produtosAtualizados = produtos.map(produto => 
-        produto.id === id ? {...produto, nome, descricao} : produto
-    );
-
-    produtos = produtosAtualizados
-    return produtos.find(produto => produto.id === id);
+export const atualizarProduto = async ({id, title, body, userId}) => {
+    const response = await updateProduto({id, title, body, userId})
+    return response
 }
 
 export const deletarProduto = (id) => {

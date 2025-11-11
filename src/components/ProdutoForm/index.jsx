@@ -14,7 +14,7 @@ const ProdutoForm = ({ conteudoInicial = vazio, onSubmit, onCancel }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const { body, title, userId } = form
-    if (!body.trim() || !title.trim()) return
+    if (!body.trim() || !title.trim() || !userId.trim()) return
     onSubmit({ body: body.trim(), title: title.trim(), userId: parseInt(userId.trim()) })
   }
 
