@@ -29,19 +29,31 @@ const ProdutoPage = () => {
   }, [itens, filtro])
 
   const handleCreate = async ({ userId, id, title, body }) => {
-    const novo = await criarProduto({ userId, id, title, body })
-    const posts = await getProdutos()
-    setItens(posts)
+    try {
+      const novo = await criarProduto({ userId, id, title, body })
+      const posts = await getProdutos()
+      setItens(posts)
+      alert("Criado com sucesso")
+    } catch(erro) {
+      alert(`Erro ao criar post: ${erro.message}`)
+    }
+    
   }
 
   const handleUpdate = async ({ userId, id, title, body }) => {
-    if (!selecionado) return
-    const atualizado = await atualizarProduto({ id: selecionado.id, title, body, userId })
-    if (atualizado) {
-      const posts = await getProdutos()
-      setItens(posts)
-      setEditandoId(null)
+    try {
+      if (!selecionado) return
+      const atualizado = await atualizarProduto({ id: selecionado.id, title, body, userId })
+      if (atualizado) {
+        const posts = await getProdutos()
+        setItens(posts)
+        setEditandoId(null)
+      }
+      alert("Atualizado com sucesso")
+    } catch(erro) {
+      alert(`Erro ao atualizar post: ${erro.message}`)
     }
+    
   }
 
   const requestDelete = (id) => {
@@ -54,12 +66,18 @@ const ProdutoPage = () => {
   }
 
   const confirmDelete = async () => {
-    if (deletarProduto(confirm.id)) {
-      const posts = await getProdutos()
-      setItens(posts)
-      if (editandoId === confirm.id) setEditandoId(null)
+    try {
+      if (deletarProduto(confirm.id)) {
+        const posts = await getProdutos()
+        setItens(posts)
+        if (editandoId === confirm.id) setEditandoId(null)
+      }
+      setConfirm({ open: false, id: null, msg: '' })
+      alert("Deletado com sucesso")
+
+    } catch(erro) {
+      alert(`Erro ao deletar post: ${erro.message}`)
     }
-    setConfirm({ open: false, id: null, msg: '' })
   }
 
   return (
