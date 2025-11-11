@@ -45,7 +45,6 @@ const ProdutoPage = () => {
   }
 
   const requestDelete = (id) => {
-    console.log(itens)
     const alvo = itens.find(i => i.id === id)
     setConfirm({
       open: true,

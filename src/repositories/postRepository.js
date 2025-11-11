@@ -44,6 +44,5 @@ export const excluirProduto = async (id) => {
         method: 'DELETE',
     });
     const json = await response.json();
-    console.log(json)
     return true;
 }
