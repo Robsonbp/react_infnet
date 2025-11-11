@@ -1,7 +1,7 @@
 import styles from './style.module.css'
 
 const ProdutoTabela = ({ itens = [], onEdit, onDelete }) => {
-  if (!itens.length) return <div className="card empty">Nenhum produto cadastrado.</div>
+  if (!itens.length) return <div className="card empty">Nenhum post cadastrado.</div>
 
   return (
     <div className={styles.card}>

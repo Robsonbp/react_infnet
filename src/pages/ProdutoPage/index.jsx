@@ -28,16 +28,18 @@ const ProdutoPage = () => {
     )
   }, [itens, filtro])
 
-  const handleCreate = ({ userId, id, title, body }) => {
+  const handleCreate = async ({ userId, id, title, body }) => {
     const novo = criarProduto({ userId, id, title, body })
-    setItens(getProdutos())
+    posts = await getProdutos()
+    setItens(posts)
   }
 
-  const handleUpdate = ({ userId, id, title, body }) => {
+  const handleUpdate = async ({ userId, id, title, body }) => {
     if (!selecionado) return
     const atualizado = atualizarProduto({ id: selecionado.id, userId, id, title, body })
     if (atualizado) {
-      setItens(getProdutos())
+      posts = await getProdutos()
+      setItens(posts)
       setEditandoId(null)
     }
   }
@@ -47,7 +49,7 @@ const ProdutoPage = () => {
     setConfirm({
       open: true,
       id,
-      msg: `Tem certeza que deseja excluir o produto "${alvo?.nome}" (ID: ${id})? Essa ação não pode ser desfeita.`
+      msg: `Tem certeza que deseja excluir o post "${alvo?.title}" (ID: ${id})? Essa ação não pode ser desfeita.`
     })
   }
 

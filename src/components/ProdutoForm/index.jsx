@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import styles from './style.module.css'
 
-const vazio = { nome: '', descricao: '' }
+const vazio = { body: '', title: '', userId: '' }
 
 const ProdutoForm = ({ conteudoInicial = vazio, onSubmit, onCancel }) => {
   const [form, setForm] = useState(conteudoInicial)
@@ -13,27 +13,34 @@ const ProdutoForm = ({ conteudoInicial = vazio, onSubmit, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const { nome, descricao } = form // destructuring
-    if (!nome.trim() || !descricao.trim()) return
-    onSubmit({ nome: nome.trim(), descricao: descricao.trim() })
+    const { body, title, userId } = form
+    if (!body.trim() || !title.trim()) return
+    onSubmit({ body: body.trim(), title: title.trim(), userId: parseInt(userId.trim()) })
   }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h2 className={styles.title}>{conteudoInicial?.id ? 'Editar produto' : 'Novo produto'}</h2>
+      <h2 className={styles.title}>{conteudoInicial?.id ? 'Editar post' : 'Novo post'}</h2>
       <div className={styles.stack}>
         <input
           className={styles.input}
-          name="nome"
-          placeholder="Nome do produto"
-          value={form.nome}
+          name="body"
+          placeholder="Body"
+          value={form.body}
           onChange={handleChange}
         />
         <input
           className={styles.input}
-          name="descricao"
-          placeholder="Descrição"
-          value={form.descricao}
+          name="title"
+          placeholder="Title"
+          value={form.title}
+          onChange={handleChange}
+        />
+        <input
+          className={styles.input}
+          name="userId"
+          placeholder="User Id"
+          value={form.userId}
           onChange={handleChange}
         />
         <div className={styles.actions}>
