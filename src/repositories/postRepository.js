@@ -39,19 +39,11 @@ export const updateProduto = async ({id, title, body, userId}) => {
     return json
 }
 
-export const excluirProduto = (id) => {
-    const produtoParaDeletar = produtos.find(produto => produto.id === id);
-
-    if (!produtoParaDeletar) {
-        console.log(`Tentativa de excluir produto com id ${id} não encontrado`);
-        return false
-    }
-
-    const mensagemConfirmacao = `Tem certeza que deseja excluir o item '${produtoParaDeletar.nome}' (ID: ${id})?`;
-    if (window.confirm(mensagemConfirmacao)) {
-        produtos = produtos.filter(produto => produto.id !== id);
-        return true
-    }
-
-    return false
+export const excluirProduto = async (id) => {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        method: 'DELETE',
+    });
+    const json = await response.json();
+    console.log(json)
+    return true;
 }

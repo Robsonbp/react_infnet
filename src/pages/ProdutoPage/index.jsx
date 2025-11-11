@@ -45,6 +45,7 @@ const ProdutoPage = () => {
   }
 
   const requestDelete = (id) => {
+    console.log(itens)
     const alvo = itens.find(i => i.id === id)
     setConfirm({
       open: true,
@@ -53,9 +54,10 @@ const ProdutoPage = () => {
     })
   }
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     if (deletarProduto(confirm.id)) {
-      setItens(getProdutos())
+      const posts = await getProdutos()
+      setItens(posts)
       if (editandoId === confirm.id) setEditandoId(null)
     }
     setConfirm({ open: false, id: null, msg: '' })
